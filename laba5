@@ -1,0 +1,218 @@
+////divisors lab5.txt
+package com.company;
+
+public class divisors {
+
+    public static int nok(int a, int b) {
+        return a * b / nod(a, b);
+    }
+
+    public static int nod(int a, int b) {
+        if (b == 0) {
+            return a;
+        }
+        return nod(b, a % b);
+    }
+}
+//////////////
+
+
+
+
+////////////fraction lab5.txt
+package com.company;
+
+public class Fraction {
+    private int num;
+    private int den;
+
+    //первая дробь
+    public Fraction(int num, int den) throws Exception {
+        if (den == 0){
+          throw new Exception("Знаменатель не олжен быть 0");
+        }
+        this.num = num;
+        this.den = den;
+    }
+
+    //вторая дробь
+    public Fraction() {
+        this.num = 1;
+        this.den = 1;
+    }
+
+    //сумма дробей
+
+    public static void sum(Fraction fraction1, Fraction fraction2){
+        int nok_number = divisors.nok(fraction1.den, fraction2.den);
+        Fraction res = new Fraction((fraction1.num * (nok_number /fraction1.den)) + (fraction2.num * (nok_number /fraction2.den)), nok_number);
+        int nod_number = divisors.nod(res.num, res.den);
+        System.out.println("Результат суммы: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+    public void sum(Fraction fraction){
+        int nok_number = divisors.nok(this.den, fraction.den);
+        Fraction res = new Fraction((this.num * (nok_number / this.den))+(fraction.num * (nok_number / fraction.den)), nok_number);
+        int nod_number = divisors.nod(res.num, res.den);
+        System.out.println("Результат суммы: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+
+
+    //вычитание дробей
+
+    public static void subtraction(Fraction fraction1, Fraction fraction2){
+        int nok_number = divisors.nok(fraction1.den, fraction2.den);
+        Fraction res = new Fraction((fraction1.num * (nok_number / fraction1.den))-(fraction2.num * (nok_number / fraction2.den)),nok_number);
+        int nod_number = divisors.nod(Math.abs(res.num), res.den);
+        System.out.println("Результат вычитания: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+    public void subtraction(Fraction fraction){
+        int nok_number = divisors.nok(this.den, fraction.den);
+        Fraction res = new Fraction((this.num * (nok_number / this.den))-(fraction.num * (nok_number / fraction.den)), nok_number);
+        int nod_number = divisors.nod(Math.abs(res.num), res.den);
+        System.out.println("Результат вычитания: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+
+    //умножение дробей
+
+    public static void imp(Fraction fraction1, Fraction fraction2){
+        Fraction res = new Fraction(fraction1.num*fraction2.num, fraction1.den*fraction2.den);
+        int nod_number = divisors.nod(res.num, res.den);
+        System.out.println("Результат умножения: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+    public void imp(Fraction fraction_with_one_arg){
+        Fraction res = new Fraction(fraction_with_one_arg.num * this.num, fraction_with_one_arg.den * this.den);
+        int nod_number = divisors.nod(res.num, res.den);
+        System.out.println("Результат умножения: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+
+
+    //деление дробей
+
+
+    public static void del(Fraction fraction1, Fraction fraction2){
+        Fraction res = new Fraction(fraction1.num*fraction2.den, fraction1.den*fraction2.num);
+        int nod_number = divisors.nod(res.num, res.den);
+        System.out.println("Результат деления: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+    public void del(Fraction fraction){
+        Fraction res = new Fraction(this.num * fraction.den, fraction.num * this.den);
+        int nod_number = divisors.nod(res.num, res.den);
+        System.out.println("Результат деления: " + res.num/nod_number + "/" + res.den/nod_number);
+    }
+
+
+    public String toString() {
+        return this.num + "/" + this.den;
+    }
+}
+
+
+
+
+////////////main lab
+package com.company;
+
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите числитель первой дроби: ");
+        int numerator1;
+
+        while(true) {
+            if (!in.hasNextInt()) {
+                System.out.println("Некорректный ввод, повторите попытку ");
+            }else {
+                numerator1 = in.nextInt();
+                break;
+                }
+            in.next();
+        }
+
+        System.out.println("Введите знаменатель первой дроби: ");
+        int denominator1;
+        while(true) {
+            if (!in.hasNextInt()) {
+                System.out.println("Некорректный ввод, повторите попытку ");
+            }else {
+                denominator1 = in.nextInt();
+                if (denominator1 == 0) {
+                    System.out.println("Некорректный ввод, повторите попытку ");
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            in.next();
+        }
+
+
+        System.out.println("Введите числитель второй дроби: ");
+        int numerator2;
+
+        while(true) {
+            if (!in.hasNextInt()) {
+                System.out.println("Некорректный ввод, повторите попытку!");
+            }else {
+                numerator2 = in.nextInt();
+                break;
+            }
+            in.next();
+        }
+
+
+        System.out.println("Введите знаменатель второй дроби: ");
+        int denominator2;
+
+        while(true) {
+            if (!in.hasNextInt()) {
+                System.out.println("Некорректный ввод, повторите попытку!");
+            }else {
+                denominator2 = in.nextInt();
+                if (denominator2 == 0) {
+                    System.out.println("Некорректный ввод, повторите попытку!");
+                    continue;
+                } else {
+                    break;
+                }
+            }
+            in.next();
+        }
+
+        in.close();
+
+        try {
+            Fraction first_fraction = new Fraction(numerator1,denominator1);
+            Fraction second_fraction = new Fraction(numerator2, denominator2);
+
+
+            //Умножение др
+            Fraction.imp(first_fraction, second_fraction);
+            first_fraction.imp(second_fraction);
+
+
+            //Деление др
+            Fraction.del(first_fraction, second_fraction);
+            first_fraction.del(second_fraction);
+
+
+            //Сложение др
+            Fraction.sum(first_fraction, second_fraction);
+            first_fraction.sum(second_fraction);
+
+
+            //Вычитание др
+            Fraction.subtraction(first_fraction, second_fraction);
+            first_fraction.subtraction(second_fraction);
+
+
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            System.exit(-1);
+        }
+    }
+}
+
